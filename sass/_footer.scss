@@ -1,0 +1,5 @@
+.footer {
+  background-color: $color-secondary;
+  // footer section is full-bleed so it needs the extra side columns
+  grid-column: full-start / full-end;
+}

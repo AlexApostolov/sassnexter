@@ -1,0 +1,5 @@
+.gallery {
+  background-color: $color-grey-dark-1;
+  // gallery section is full-bleed so it needs the extra side columns
+  grid-column: full-start / full-end;
+}
