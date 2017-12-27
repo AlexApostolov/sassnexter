@@ -1,4 +1,36 @@
 .features {
-  background-color: $color-grey-light-2;
   grid-column: center-start / center-end;
+  margin: 15rem 0;
+
+  // Create sub-grid to have alignment between inner content columns & overall page layout columns
+  display: grid;
+  /* Without using media queries allow grid to change # of columns as viewport gets narrower.
+  Once a feature item can't fit with at least 250px, it gets knocked down to the next row. */
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  // NOTE: We don't need to define rows since we have implicit: grid-template-rows: auto auto
+  grid-gap: 6rem;
+  // If not specified, default is "stretch", but we want the text under the header to be uniform for each feature
+  align-items: start;
+}
+
+.feature {
+  // A grid inside of a grid inside of a grid
+  display: grid;
+  // Automatically take the width of the icon, e.g. the 4.5rem below, & the 2nd column will take the rest
+  grid-template-columns: min-content 1fr;
+  grid-row-gap: 1.5rem;
+  grid-column-gap: 2.5rem;
+
+  &__icon {
+    fill: $color-primary;
+    width: 4.5rem;
+    height: 4.5rem;
+    // -1 only works with an explicit grid, so we end with a span here instead since rows weren't defined
+    grid-row: 1 / span 2;
+    transform: translateY(-1rem);
+  }
+
+  &__text {
+    font-size: 1.7rem;
+  }
 }
