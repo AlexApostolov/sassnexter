@@ -1,4 +1,90 @@
 .homes {
-  background-color: $color-secondary;
+  display: grid;
   grid-column: center-start / center-end;
+  margin: 15rem 0;
+
+  // Automatically fit as many columns as possible with at least 25rem
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-gap: 7rem;
+}
+
+.home {
+  background-color: $color-grey-light-1;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  // Make space between the name that's halfway out of the picture & the details below it
+  grid-row-gap: 3.5rem;
+
+  &__img {
+    width: 100%;
+    // Explicitly define rows so that the heart/like icon can be placed on top of the image
+    grid-row: 1 / 2;
+    // z-index is just to make sure the image will always render under the heart icon--which is given an even higher index
+    z-index: 1;
+    grid-column: 1 / -1;
+  }
+
+  &__like {
+    // Explicitly define what row, otherwise heart icon will be in the center of column not top right
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    fill: $color-primary;
+    height: 2.5rem;
+    width: 2.5rem;
+    // Make sure this icon always renders on top of the image
+    z-index: 2;
+    justify-self: end;
+    margin: 1rem;
+  }
+
+  &__name {
+    // Take same cell as picture
+    grid-row: 1 / 2;
+    grid-column: 1 / -1;
+    justify-self: center;
+    // Instead of taking up the whole height of the picture, just take up the bottom
+    align-self: end;
+    z-index: 3;
+
+    width: 80%;
+    font-family: $font-display;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 1.25rem;
+    background-color: $color-secondary;
+    color: #fff;
+    font-weight: 400;
+    /* Push halfway down out of image cell--50% corresponds to 50% of the height of the element itself,
+    so its center will be aligned with the bottom edge. */
+    transform: translateY(50%);
+  }
+
+  // The grid-row-gap is still not enough space between the name and the 1st row of details below it
+  &__location,
+  &__rooms {
+    margin-top: 2.5rem;
+  }
+
+  &__location,
+  &__rooms,
+  &__area,
+  &__price {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+
+    svg {
+      fill: $color-primary;
+      height: 2rem;
+      width: 2rem;
+      // There are no gaps in flexbox like in grid, so we use margins for spacing between icons & text
+      margin-right: 1rem;
+    }
+  }
+
+  &__btn {
+    grid-column: 1 / -1;
+  }
 }
