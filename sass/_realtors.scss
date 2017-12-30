@@ -1,4 +1,50 @@
 .realtors {
   background-color: $color-secondary;
   grid-column: col-start 7 / full-end;
+  padding: 3rem;
+
+  // The heading is in an outer realtors grid.
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  grid-row-gap: 2rem;
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-column: 1 / -1;
+  }
+
+  // The list is a nested grid.
+  &__list {
+    display: grid;
+    /* The images are the 1st column & are already defined with a width so the minimum works,
+    the 2nd column is the text and needs more grid room */
+    grid-template-columns: min-content max-content;
+    grid-column-gap: 2rem;
+    // viewport height scales more reasonably on very large monitors
+    grid-row-gap: 5vh;
+    align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      // Place realtors side by side: picture column & text 3x
+      grid-template-columns: repeat(3, min-content max-content);
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      // Revert back to stacking the realtors
+      grid-template-columns: min-content max-content;
+    }
+  }
+
+  &__img {
+    width: 7rem;
+    border-radius: 50%;
+    // Always best to display images as a block
+    display: block;
+  }
+  &__sold {
+    text-transform: uppercase;
+    color: $color-grey-light-2;
+    margin-top: -3px;
+  }
 }

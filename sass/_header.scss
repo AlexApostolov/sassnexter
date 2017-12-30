@@ -1,4 +1,82 @@
 .header {
   background-color: $color-grey-dark-1;
   grid-column: full-start / col-end 6;
+  // Make background image darker first
+  background-image: linear-gradient(
+      rgba($color-secondary, 0.93),
+      rgba($color-secondary, 0.93)
+    ),
+    url(../img/hero.jpeg);
+  background-size: cover;
+  background-position: center;
+  padding: 8rem;
+  padding-top: 4rem;
+
+  // With Grid we just have to define the line heights, unlike with Floats defining all the margins
+  display: grid;
+  // Increase the row size giving the logo a lot of room but prevent the header from overflow on small screens with a minimum
+  grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr;
+  /* To make the centered logo look more centered in comparison with the main header, have content in container take up all the space
+  while also allowing it to scale down on smaller screens. */
+  grid-template-columns: minmax(min-content, max-content);
+  grid-row-gap: 1.5rem;
+  // Center the entire grid track inside the container
+  justify-content: center;
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-column: 1 / -1;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding: 5rem;
+  }
+
+  &__logo {
+    height: 3rem;
+    justify-self: center;
+  }
+
+  &__btn {
+    align-self: start;
+    justify-self: start;
+  }
+
+  &__seenon-text {
+    // Text can also be a grid item, center it and place a rule before & after the text.
+    display: grid;
+    // We don't want the line before & after the text to take the full container width
+    grid-template-columns: 1fr max-content 1fr;
+    // Create space between the rules & the text at center
+    grid-column-gap: 1.5rem;
+    // Center the text & rules on either side
+    align-items: center;
+    font-size: 1.6rem;
+    color: $color-grey-light-2;
+
+    &::before,
+    &::after {
+      content: "";
+      height: 1px;
+      display: block;
+      background-color: currentColor;
+    }
+  }
+  &__seenon-logos {
+    // Instead of using flexbox & messing with margins we'll use Grid
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 3rem;
+    justify-items: center;
+    // Keep the logos vertically aligned on smaller screens
+    align-items: center;
+
+    img {
+      // Ensure all the logos have the same height, but constrain the scaling with max-height instead of height, & max-width is needed as well
+      max-height: 2.5rem;
+      max-width: 100%;
+
+      // Bright white is too distracting
+      filter: brightness(70%);
+    }
+  }
 }
