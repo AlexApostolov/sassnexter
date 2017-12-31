@@ -2,18 +2,31 @@
   grid-column: center-start / center-end;
   margin: 15rem 0;
 
-  // Create sub-grid to have alignment between inner content columns & overall page layout columns
-  display: grid;
-  /* Without using media queries allow grid to change # of columns as viewport gets narrower.
-  Once a feature item can't fit with at least 250px, it gets knocked down to the next row. */
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-  // NOTE: We don't need to define rows since we have implicit: grid-template-rows: auto auto
-  grid-gap: 6rem;
-  // If not specified, default is "stretch", but we want the text under the header to be uniform for each feature
-  align-items: start;
+  // PROGRESSIVE ENHANCEMENT (only an example, not used throughout webpage)
+  @supports (display: grid) {
+    // Create sub-grid to have alignment between inner content columns & overall page layout columns
+    display: grid;
+    /* Without using media queries allow grid to change # of columns as viewport gets narrower.
+    Once a feature item can't fit with at least 250px, it gets knocked down to the next row. */
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    // NOTE: We don't need to define rows since we have implicit: grid-template-rows: auto auto
+    grid-gap: 6rem;
+    // If not specified, default is "stretch", but we want the text under the header to be uniform for each feature
+    align-items: start;
+  }
 }
 
 .feature {
+  // PROGRESSIVE ENHANCEMENT (just one example)
+  float: left;
+  width: 33.3333%;
+  margin-bottom: 6rem;
+
+  @supports (display: grid) {
+    // NOTE: Some things don't need to be reset because Grid will ignore & override them like floats and flex.
+    width: auto;
+    margin-bottom: 0;
+  }
   // A grid inside of a grid inside of a grid
   display: grid;
   // Automatically take the width of the icon, e.g. the 4.5rem below, & the 2nd column will take the rest
